@@ -12,6 +12,11 @@ class ImportArticles extends Command
     /**
      * The name and signature of the console command.
      *
+     *  The "path" argument is a required argument that represents a system path.
+     *
+     *  Example usage:
+     *  php artisan app:import-articles /home/user/Downloads/test.csv
+     *
      * @var string
      */
     protected $signature = 'app:import-articles {filePath}';
