@@ -19,7 +19,8 @@ class LogSuccessfulLogin
     }
 
     /**
-     * Handle the event.
+     * @param IlluminateAuthEventsLogin $event
+     * @return void
      */
     public function handle(IlluminateAuthEventsLogin $event): void
     {
