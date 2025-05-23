@@ -3,4 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 
-Route::get('/get-all-articles', [ArticleController::class, 'getAllArticles']);
+Route::post('/login', [ArticleController::class, 'login']);
+
+Route::get('/get-all-articles', [ArticleController::class, 'getAllArticles'])->middleware('auth:sanctum');

@@ -19,7 +19,8 @@ class ImportArticles extends Command
      *
      * @var string
      */
-    protected $signature = 'app:import-articles {filePath}';
+    protected $signature = 'app:import-articles
+        {filePath : Path represents a system path of the file to be imported}';
 
     /**
      * The console command description.
