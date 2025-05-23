@@ -97,6 +97,8 @@ class UserCrudController extends CrudController
         $email = backpack_user()->email;
         CreateSendUserDataExportJob::dispatch($email);
 
+        \Alert::add('success', 'Request for email with exported data sent successfully')->flash();
+
          return back();
     }
 
