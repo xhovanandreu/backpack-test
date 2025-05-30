@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('duration_time');
             $table->integer('duration_traffic');
             $table->dateTime('start_time');
-            $table->decimal('km', 8, 2);
+            $table->string('distance', );
             $table->timestamps();
         });
     }

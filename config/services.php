@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'services.google_maps.api_key',
+
+    'google_maps' => [
+//        'api_key' => 'dgsxgsdgdgs',
+        'api_key' => 'AIzaSyATmRjXle6OFPDHhbkmvCZxsgPH_xP5hu0',
+    ],
+
 ];

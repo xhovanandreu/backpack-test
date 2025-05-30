@@ -25,7 +25,7 @@ class DistanceDurationTime extends Model
         'duration_time',
         'duration_traffic',
         'start_time',
-        'km'
+        'distance'
     ];
 
 

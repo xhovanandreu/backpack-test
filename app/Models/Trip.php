@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Events\CalculateTripEvent;
+use Illuminate\Support\Facades\Http;
 class Trip extends Model
 {
     use CrudTrait;
@@ -52,6 +53,9 @@ class Trip extends Model
     {
         static::saved(function (Trip $trip) {
             event(new CalculateTripEvent($trip));
+
+//            $response = Http::get('http://example.com');
+//            dd($response->json());
         });
     }
 

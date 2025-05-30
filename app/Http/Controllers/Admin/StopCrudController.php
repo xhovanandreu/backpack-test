@@ -52,7 +52,6 @@ class StopCrudController extends CrudController
     {
         CRUD::setValidation(StopRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
-
     }
 
     /**
