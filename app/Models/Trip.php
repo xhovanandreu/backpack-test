@@ -49,15 +49,6 @@ class Trip extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    protected static function booted(): void
-    {
-        static::saved(function (Trip $trip) {
-            event(new CalculateTripEvent($trip));
-
-//            $response = Http::get('http://example.com');
-//            dd($response->json());
-        });
-    }
 
     /*
     |--------------------------------------------------------------------------

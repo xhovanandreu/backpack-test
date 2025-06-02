@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\CalculateTripEvent;
 use App\Http\Requests\TripRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -166,16 +167,17 @@ class TripCrudController extends CrudController
         // register any Model Events defined on fields
         $this->crud->registerFieldEvents();
 
+
         // insert item in the db
         $item = $this->crud->create($this->crud->getStrippedSaveRequest($request));
         $this->data['entry'] = $this->crud->entry = $item;
-
+//        dd($item);
         // show a success message
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
-
+        event(new CalculateTripEvent($item));
         // save the redirect choice for next time
         $this->crud->setSaveAction();
-dd('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv df');
+
         return $this->crud->performSaveAction($item->getKey());
     }
 }
