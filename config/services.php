@@ -35,12 +35,8 @@ return [
         ],
     ],
 
-    'services.google_maps.api_key',
-
     'google_maps' => [
-//        'api_key' => 'dgsxgsdgdgs',
-//        'api_key' => 'AIzaSyATmRjXle6OFPDHhbkmvCZxsgPH_xP5hu0',
-        'api_key' => 'AIzaSyD_ngcKNrM2DyXKzlXfjjZGQLuBOgq_L6k',
+        'api_key' => env('GOOGLE_MATRIX_API_KEY'),
     ],
 
 ];
