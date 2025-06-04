@@ -50,9 +50,15 @@ class GoogleDistanceMatrixAPIService
                 ]
             );
 
+            if (!$response) {
+                Log::warning("No response returned from Google API for trip ID {$trip->id}");
+                return null;
+            }
+
+
             return $this->processResponse($startStop, $endStops, $trip->starting_time, json_decode($response->getBody(), true));
         } catch (Exception $e) {
-
+            Log::error("Trip calculation failed for trip ID {$trip->id}: {$e->getMessage()}");
             return null;
         }
 
