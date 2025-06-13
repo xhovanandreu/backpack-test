@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->decimal('lat', 10, 8)->nullable();
-            $table->decimal('long', 10, 8)->nullable();
+            $table->decimal('lat', 8, 6)->nullable();
+            $table->decimal('long', 9, 6)->nullable();
             $table->timestamps();
         });
     }
