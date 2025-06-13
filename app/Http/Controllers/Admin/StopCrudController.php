@@ -2,24 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UserRequest;
-use App\Jobs\CreateSendUserDataExportJob;
+use App\Http\Requests\StopRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Illuminate\Support\Facades\Log;
-use App\Models\User;
-
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
-use App\Exports\UserExport;
-use Maatwebsite\Excel\Facades\Excel;
 
 /**
- * Class UserCrudController
+ * Class StopCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class UserCrudController extends CrudController
+class StopCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -34,9 +26,9 @@ class UserCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\User::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
-        CRUD::setEntityNameStrings('user', 'users');
+        CRUD::setModel(\App\Models\Stop::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/stop');
+        CRUD::setEntityNameStrings('stop', 'stops');
     }
 
     /**
@@ -48,15 +40,7 @@ class UserCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // set columns from db columns.
-        $this->crud->addButton('top', 'export', 'view', 'crud::buttons.user_data_export', 'beginning', false);
-
-
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
     }
-
 
     /**
      * Define what happens when the Create operation is loaded.
@@ -66,16 +50,8 @@ class UserCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(UserRequest::class);
+        CRUD::setValidation(StopRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
-        CRUD::field('password_confirmation')->label('Password confirmation')->type('password');
-
-
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::field('price')->type('number');
-         */
     }
 
     /**
@@ -87,19 +63,5 @@ class UserCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
-
     }
-
-
-    public function exportAllUsers() {
-
-
-        $email = backpack_user()->email;
-        CreateSendUserDataExportJob::dispatch($email);
-
-        \Alert::add('success', 'Request for email with exported data sent successfully')->flash();
-
-         return back();
-    }
-
 }
