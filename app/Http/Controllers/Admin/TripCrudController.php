@@ -157,8 +157,6 @@ class TripCrudController extends CrudController
     public function store()
     {
 
-
-
         $this->crud->hasAccessOrFail('create');
 
         // execute the FormRequest authorization and validation, if one is required
@@ -171,10 +169,12 @@ class TripCrudController extends CrudController
         // insert item in the db
         $item = $this->crud->create($this->crud->getStrippedSaveRequest($request));
         $this->data['entry'] = $this->crud->entry = $item;
-//        dd($item);
+
         // show a success message
         \Alert::success(trans('backpack::crud.insert_success'))->flash();
+
         event(new CalculateTripEvent($item));
+
         // save the redirect choice for next time
         $this->crud->setSaveAction();
 

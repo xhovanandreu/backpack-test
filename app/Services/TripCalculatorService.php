@@ -54,10 +54,7 @@ class TripCalculatorService
      */
     public function getTheDurationInTraffic(Trip $trip) : DistanceDurationTime
     {
-        return DistanceDurationTime::where('start_point', $trip->getAttribute('start_point'))
-            ->where('end_point', $trip->getAttribute('end_point'))
-            ->where('start_time', $trip->getAttribute('starting_time'))
-            ->first()?? $this->googleMatrixService->calculateTripDurationTimeApiCAll($trip);
+        return DistanceDurationTime::matchingRouteAndTime($trip)->first()?? $this->googleMatrixService->calculateTripDurationTimeApiCAll($trip);
     }
 
 }

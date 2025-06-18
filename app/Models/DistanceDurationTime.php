@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class DistanceDurationTime extends Model
@@ -29,4 +30,11 @@ class DistanceDurationTime extends Model
     ];
 
 
+
+    public function scopeMatchingRouteAndTime(Builder $query, Trip|int|string|null $trip): Builder
+    {
+        return $query->where('start_point', $trip->start_point)
+            ->where('end_point', $trip->end_point)
+            ->where('start_time', $trip->starting_time);
+    }
 }
