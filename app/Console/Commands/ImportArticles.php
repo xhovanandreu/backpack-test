@@ -16,6 +16,7 @@ class ImportArticles extends Command
      *
      *  Example usage:
      *  php artisan app:import-articles /home/user/Downloads/test.csv
+     *  php artisan app:import-articles /home/user/Downloads/tableConvert.com_q1zuta.csv
      *
      * @var string
      */

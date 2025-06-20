@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
@@ -12,9 +13,18 @@ class Article extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'date',
-        'price',
+        'title',
+        'subtitle',
+        'body',
     ];
+
+
+    public function scopeSearch(Builder $query, $searchText): Builder
+    {
+
+        return $query->where('title', 'like', "%{$searchText}%")
+        ->orWhere('subtitle', 'like', "%{$searchText}%")
+        ->orWhere('body', 'like', "%{$searchText}%");
+    }
 
 }

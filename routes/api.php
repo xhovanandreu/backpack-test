@@ -1,8 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\API\ArticleAPIController;
+use App\Http\Controllers\API\LoginAPIController;
 
-Route::post('/login', [ArticleController::class, 'login']);
+Route::post('/login', [LoginAPIController::class, 'login']);
 
-Route::get('/get-all-articles', [ArticleController::class, 'getAllArticles'])->middleware('auth:sanctum');
+Route::prefix('v1')->group(function () {
+        Route::get('/articles/search', [ArticleAPIController::class, 'index']);
+        Route::get('/article/{articleId}', [ArticleAPIController::class, 'show']);
+});
+

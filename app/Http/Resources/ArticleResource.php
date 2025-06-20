@@ -5,6 +5,22 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Article;
+
+/**
+ * @OA\Schema(
+ *     schema="ArticleResource",
+ *     type="object",
+ *     @OA\Property(property="title", type="string", example="The Art of Letting Go: Why Detachment Brings Peace"),
+ *     @OA\Property(property="subtitle", type="string", example="Understanding the freedom in releasing control and expectations"),
+ *     @OA\Property(property="body", type="string", example="In a world that constantly encourages us to hustle, chase, and control outcomes, the idea of letting go can feel like giving up. But true peace and growth often begin when we detach from what we can't control. By surrendering the need for a fixed result, you free yourself from unnecessary anxiety. You allow life to unfold naturally, and often, in better ways than you imagined. Practicing detachment is not weakness; it's strength rooted in trust and emotional maturity."),
+ * ),
+ * @OA\Schema(
+ *      schema="ErrorResponse",
+ *      type="object",
+ *      @OA\Property(property="success", type="boolean", example=false),
+ *      @OA\Property(property="message", type="string", example="An error occurred.")
+ *  )
+ */
 class ArticleResource extends JsonResource
 {
     /**
@@ -16,12 +32,9 @@ class ArticleResource extends JsonResource
     {
 
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'date' => $this->date,
-            'price' => $this->price,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'title' => $this->title,
+            'subtitle' => $this->subtitle,
+            'body' => $this->body
         ];
 
     }

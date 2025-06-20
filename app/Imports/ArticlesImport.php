@@ -21,9 +21,9 @@ class ArticlesImport implements ToModel, WithValidation, WithHeadingRow
     public function model(array $row)
     {
         return new Article([
-            'name'     => $row['name'],
-            'date'    => $row['date'],
-            'price' =>  $row['price'],
+            'title'     => $row['title'],
+            'subtitle'    => $row['subtitle'],
+            'body' =>  $row['body'],
         ]);
     }
 
@@ -35,11 +35,10 @@ class ArticlesImport implements ToModel, WithValidation, WithHeadingRow
 
     public function rules(): array
     {
-
         return [
-            'name' => ['required','string'],
-            'date' => ['required', 'date_format:Y-m-d'],
-            'price'=>['required','numeric'],
+            'title' => ['required','string'],
+            'subtitle' => ['required','string'],
+            'body' => ['required','string'],
         ];
     }
 
