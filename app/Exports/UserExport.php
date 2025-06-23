@@ -14,7 +14,7 @@ class UserExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return User::get(['name', 'email', 'password_changed_count','name_change_count', 'login_count']);
+        return User::get(['name', 'email', 'password_change_count','name_change_count', 'login_count']);
     }
 
     public function headings() :array

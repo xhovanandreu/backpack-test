@@ -1,0 +1,329 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Public API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/v1/articles/search": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Get list of articles",
+                "operationId": "ae1edf09364489619a81eb0d18901afa",
+                "parameters": [
+                    {
+                        "name": "text",
+                        "in": "query",
+                        "description": "Text to search in articles",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 255,
+                            "example": "The Art of Letting Go"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ArticleResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized – Bearer token missing or invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/article/{articleId}": {
+            "get": {
+                "tags": [
+                    "Articles"
+                ],
+                "summary": "Retrieve a single article",
+                "operationId": "c45626f4ec6a57268173de541449d7dc",
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "The ID of the article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 38
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single article",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ArticleResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized – Bearer token missing or invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login useig keys",
+                "operationId": "c903e13854d8c70027b4b84a0c4aeadf",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AppKeyAuthRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Authed user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AuthKeysResource"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ErrorResponse": {
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "An error occurred."
+                    }
+                },
+                "type": "object"
+            },
+            "AppKeyAuthRequest": {
+                "title": "Login with public key and secret key Request",
+                "description": "Request parameters to identify user has access",
+                "properties": {
+                    "app_key": {
+                        "description": "Generated Public Key",
+                        "type": "string",
+                        "example": "3ebd11afbf17bf7780a76a0288262cc05dd8848d"
+                    },
+                    "app_secret": {
+                        "description": "Generated Secret Key",
+                        "type": "string",
+                        "example": "445d314af62141f846b2fa547521e9ff70c36b11"
+                    }
+                },
+                "type": "object"
+            },
+            "SearchArticlesRequest": {
+                "title": "List Articles Request",
+                "description": "Request parameters for listing articles",
+                "properties": {
+                    "text": {
+                        "description": "The article text",
+                        "type": "string",
+                        "example": "The Art of Letting Go "
+                    }
+                },
+                "type": "object"
+            },
+            "ArticleResource": {
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "The Art of Letting Go: Why Detachment Brings Peace"
+                    },
+                    "subtitle": {
+                        "type": "string",
+                        "example": "Understanding the freedom in releasing control and expectations"
+                    },
+                    "body": {
+                        "type": "string",
+                        "example": "In a world that constantly encourages us to hustle, chase, and control outcomes, the idea of letting go can feel like giving up. But true peace and growth often begin when we detach from what we can't control. By surrendering the need for a fixed result, you free yourself from unnecessary anxiety. You allow life to unfold naturally, and often, in better ways than you imagined. Practicing detachment is not weakness; it's strength rooted in trust and emotional maturity."
+                    }
+                },
+                "type": "object"
+            },
+            "AuthKeysResource": {
+                "properties": {
+                    "status": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "token": {
+                        "type": "string",
+                        "example": "19|z3fbgx1XiDS8CSjGFUJ2edj5Ef1rcnQDGe8P99yt0b21740b"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "xhovana"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Articles",
+            "description": "Articles"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        }
+    ]
+}

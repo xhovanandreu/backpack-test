@@ -19,10 +19,12 @@ class LogSuccessfulLogin
     }
 
     /**
-     * Handle the event.
+     * @param IlluminateAuthEventsLogin $event
+     * @return void
      */
     public function handle(IlluminateAuthEventsLogin $event): void
     {
+        // git change purpose;
         $event->user->increment("login_count");
     }
 }
