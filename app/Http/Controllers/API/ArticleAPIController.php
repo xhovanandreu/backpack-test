@@ -55,7 +55,6 @@ class ArticleAPIController extends Controller
     public function index(SearchArticlesRequest $searchArticlesRequest, ArticleAPIService $articleAPIService): JsonResponse
     {
         try {
-
             $validatedSearch = $searchArticlesRequest->validated();
             $articles = $articleAPIService->list($validatedSearch['text']);
 
@@ -75,7 +74,7 @@ class ArticleAPIController extends Controller
      *     path="/api/v1/article/{articleId}",
      *     summary="Retrieve a single article",
      *     tags={"Articles"},
-     *     @OA\Parameter(
+     *     @OA\PathParameter(
      *          name="articleId",
      *          in="path",
      *          required=true,
@@ -107,9 +106,7 @@ class ArticleAPIController extends Controller
     public function show(string $articleId, ArticleAPIService $articleAPIService): JsonResponse
     {
         try {
-
             $article = $articleAPIService->show($articleId);
-
             return ArticleResource::collection($article)->response();
 
         } catch (ModelNotFoundException $e) {

@@ -24,7 +24,7 @@ class ArticleAPIService
     }
 
     /**
-     * List articles with optional search
+     * Single article datils
      *
      * @param string $articleId
      *
