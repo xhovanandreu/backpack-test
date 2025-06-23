@@ -61,6 +61,5 @@ class LoginAPIController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
 
         }
-
     }
 }

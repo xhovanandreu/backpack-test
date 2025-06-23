@@ -20,6 +20,7 @@ class ArticleAPIController extends Controller
      *     path="/api/v1/articles/search",
      *     summary="Get list of articles",
      *     tags={"Articles"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
      *           name="text",
      *           in="query",
@@ -49,7 +50,12 @@ class ArticleAPIController extends Controller
      *           response=500,
      *           description="Internal Server Error",
      *           @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
-     *       )
+     *       ),
+     *        @OA\Response(
+     *           response=401,
+     *           description="Unauthorized – Bearer token missing or invalid",
+     *           @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+     *       ),
      * )
      */
     public function index(SearchArticlesRequest $searchArticlesRequest, ArticleAPIService $articleAPIService): JsonResponse
@@ -74,6 +80,7 @@ class ArticleAPIController extends Controller
      *     path="/api/v1/article/{articleId}",
      *     summary="Retrieve a single article",
      *     tags={"Articles"},
+     *     security={{"bearerAuth":{}}},
      *     @OA\PathParameter(
      *          name="articleId",
      *          in="path",
@@ -100,7 +107,12 @@ class ArticleAPIController extends Controller
      *            response=500,
      *            description="Internal Server Error",
      *            @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
-     *       )
+     *       ),
+     *       @OA\Response(
+     *          response=401,
+     *          description="Unauthorized – Bearer token missing or invalid",
+     *          @OA\JsonContent(ref="#/components/schemas/ErrorResponse")
+     *      ),
      * )
      */
     public function show(string $articleId, ArticleAPIService $articleAPIService): JsonResponse
