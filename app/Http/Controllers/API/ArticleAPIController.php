@@ -7,6 +7,7 @@ use App\Http\Requests\AppKeyAuthRequest;
 use App\Http\Requests\SearchArticlesRequest;
 use App\Http\Resources\ArticleResource;
 use App\Http\Resources\AuthKeysResource;
+use App\Models\Article;
 use App\Services\API\ArticleAPIService;
 use App\Services\AuthKeysService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,7 +23,7 @@ class ArticleAPIController extends Controller
      *     tags={"Articles"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Parameter(
-     *           name="text",
+     *           name="search",
      *           in="query",
      *           required=false,
      *           description="Text to search in articles",
@@ -62,13 +63,13 @@ class ArticleAPIController extends Controller
     {
         try {
             $validatedSearch = $searchArticlesRequest->validated();
-            $articles = $articleAPIService->list($validatedSearch['text']);
+            $articles = $articleAPIService->list($validatedSearch['search']);
 
             return ArticleResource::collection($articles)->response();
 
         } catch (ModelNotFoundException $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], ResponseAlias::HTTP_NOT_FOUND);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -82,7 +83,7 @@ class ArticleAPIController extends Controller
      *     tags={"Articles"},
      *     security={{"bearerAuth":{}}},
      *     @OA\PathParameter(
-     *          name="articleId",
+     *          name="id",
      *          in="path",
      *          required=true,
      *          description="The ID of the article",
@@ -115,15 +116,14 @@ class ArticleAPIController extends Controller
      *      ),
      * )
      */
-    public function show(string $articleId, ArticleAPIService $articleAPIService): JsonResponse
+    public function show(Article $article): JsonResponse
     {
         try {
-            $article = $articleAPIService->show($articleId);
-            return ArticleResource::collection($article)->response();
+            return (new ArticleResource($article))->response();
 
         } catch (ModelNotFoundException $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], ResponseAlias::HTTP_NOT_FOUND);
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], ResponseAlias::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

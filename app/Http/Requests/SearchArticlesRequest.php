@@ -11,9 +11,9 @@ use Illuminate\Foundation\Http\FormRequest;
  *     title="List Articles Request",
  *     description="Request parameters for listing articles",
  *     @OA\Property(
- *         property="text",
+ *         property="search",
  *         type="string",
- *         description="The article text",
+ *         description="The article search",
  *         example="The Art of Letting Go "
  *     )
  * )
@@ -36,7 +36,7 @@ class SearchArticlesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'text' => ['nullable', 'string', 'max:255'],
+            'search' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

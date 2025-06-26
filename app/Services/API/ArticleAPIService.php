@@ -28,11 +28,11 @@ class ArticleAPIService
      *
      * @param string $articleId
      *
-     * @return Collection
+     * @return Article
      */
-    public function show(string $articleId) : Collection
+    public function show(string $articleId) : Article
     {
-        return Article::where('id',$articleId)->get();
+        return Article::find($articleId);
     }
 
 }
