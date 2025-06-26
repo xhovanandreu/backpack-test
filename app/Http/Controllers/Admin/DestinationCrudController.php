@@ -79,19 +79,15 @@ class DestinationCrudController extends CrudController
     protected function setupFields(): void
     {
         CRUD::addFields([
-            [  // Select
-                'label'     => "Article",
-                'type'      => 'select',
-                'name'      => 'article_id', // the db column for the foreign key
+            [
+                'label'         => "Article",
+                'type'          => 'select2_custom',
+                'name'          => 'article_id',
 
-                // optional
-                // 'entity' should point to the method that defines the relationship in your Model
-                // defining entity will make Backpack guess 'model' and 'attribute'
-                'entity'    => 'article',
-
-                // optional - manually specify the related model and attribute
-                'model'     => "App\Models\Article", // related model
-                'attribute' => 'title', // foreign key attribute that is shown to user
+                'entity'        => 'article', // the relationship method in your model
+                'model'         => "App\Models\Article", // the related model
+                'attribute'     => 'title', // what will be shown in the select dropdown
+                'placeholder'   => 'Choose an article',
             ],
             [
                 'name'      => 'name',
@@ -133,7 +129,6 @@ class DestinationCrudController extends CrudController
                 'attribute' => 'title', // foreign key attribute that is shown to user
 
             ],
-
 
             [
                 'name'      => 'name',
