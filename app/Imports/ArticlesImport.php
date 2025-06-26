@@ -21,9 +21,10 @@ class ArticlesImport implements ToModel, WithValidation, WithHeadingRow
     public function model(array $row)
     {
         return new Article([
-            'title'     => $row['title'],
+            'title'       => $row['title'],
             'subtitle'    => $row['subtitle'],
             'body' =>  $row['body'],
+            'slug' =>  $row['slug'],
         ]);
     }
 
@@ -39,6 +40,7 @@ class ArticlesImport implements ToModel, WithValidation, WithHeadingRow
             'title' => ['required','string'],
             'subtitle' => ['required','string'],
             'body' => ['required','string'],
+            'slug' => ['required','string', 'unique:articles,slug'],
         ];
     }
 

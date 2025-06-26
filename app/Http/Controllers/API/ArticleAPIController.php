@@ -18,7 +18,7 @@ class ArticleAPIController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/v1/articles/search",
+     *     path="/api/v1/articles",
      *     summary="Get list of articles",
      *     tags={"Articles"},
      *     security={{"bearerAuth":{}}},
@@ -78,16 +78,16 @@ class ArticleAPIController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/v1/article/{articleId}",
+     *     path="/api/v1/article/{slug}",
      *     summary="Retrieve a single article",
      *     tags={"Articles"},
      *     security={{"bearerAuth":{}}},
      *     @OA\PathParameter(
-     *          name="id",
+     *          name="slug",
      *          in="path",
      *          required=true,
-     *          description="The ID of the article",
-     *          @OA\Schema(type="integer", example=38)
+     *          description="The slug of the article",
+     *          @OA\Schema(type="string", example="the-art-of-letting-go")
      *      ),
      *      @OA\Response(
      *          response=200,

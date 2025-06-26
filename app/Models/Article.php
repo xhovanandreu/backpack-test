@@ -16,6 +16,7 @@ class Article extends Model
         'title',
         'subtitle',
         'body',
+        'slug',
     ];
 
 
@@ -25,6 +26,11 @@ class Article extends Model
         return $query->where('title', 'like', "%{$searchText}%")
         ->orWhere('subtitle', 'like', "%{$searchText}%")
         ->orWhere('body', 'like', "%{$searchText}%");
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
 }

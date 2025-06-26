@@ -5,16 +5,16 @@
         "version": "0.1"
     },
     "paths": {
-        "/api/v1/articles/search": {
+        "/api/v1/articles": {
             "get": {
                 "tags": [
                     "Articles"
                 ],
                 "summary": "Get list of articles",
-                "operationId": "ae1edf09364489619a81eb0d18901afa",
+                "operationId": "b7a11d15ce1e37223a10814d716316ec",
                 "parameters": [
                     {
-                        "name": "text",
+                        "name": "search",
                         "in": "query",
                         "description": "Text to search in articles",
                         "required": false,
@@ -87,22 +87,22 @@
                 ]
             }
         },
-        "/api/v1/article/{articleId}": {
+        "/api/v1/article/{slug}": {
             "get": {
                 "tags": [
                     "Articles"
                 ],
                 "summary": "Retrieve a single article",
-                "operationId": "c45626f4ec6a57268173de541449d7dc",
+                "operationId": "d73afa8ff31e1df57e3521181a780733",
                 "parameters": [
                     {
-                        "name": "articleId",
+                        "name": "slug",
                         "in": "path",
-                        "description": "The ID of the article",
+                        "description": "The slug of the article",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "example": 38
+                            "type": "string",
+                            "example": "the-art-of-letting-go"
                         }
                     }
                 ],
@@ -266,8 +266,8 @@
                 "title": "List Articles Request",
                 "description": "Request parameters for listing articles",
                 "properties": {
-                    "text": {
-                        "description": "The article text",
+                    "search": {
+                        "description": "The article search",
                         "type": "string",
                         "example": "The Art of Letting Go "
                     }
@@ -287,6 +287,10 @@
                     "body": {
                         "type": "string",
                         "example": "In a world that constantly encourages us to hustle, chase, and control outcomes, the idea of letting go can feel like giving up. But true peace and growth often begin when we detach from what we can't control. By surrendering the need for a fixed result, you free yourself from unnecessary anxiety. You allow life to unfold naturally, and often, in better ways than you imagined. Practicing detachment is not weakness; it's strength rooted in trust and emotional maturity."
+                    },
+                    "slug": {
+                        "type": "string",
+                        "example": "the-art-of-letting-go"
                     }
                 },
                 "type": "object"
