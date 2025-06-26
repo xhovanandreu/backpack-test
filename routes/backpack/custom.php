@@ -22,6 +22,7 @@ Route::group([
     Route::get('user-export', [UserCrudController::class, 'exportAllUsers'])->name('users.export');
     Route::crud('stop', 'StopCrudController');
     Route::crud('trip', 'TripCrudController');
+    Route::crud('destination', 'DestinationCrudController');
 }); // this should be the absolute last line of this file
 
 /**
