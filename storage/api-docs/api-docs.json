@@ -291,6 +291,9 @@
                     "slug": {
                         "type": "string",
                         "example": "the-art-of-letting-go"
+                    },
+                    "destination": {
+                        "$ref": "#/components/schemas/DestinationResource"
                     }
                 },
                 "type": "object"
@@ -308,6 +311,23 @@
                     "name": {
                         "type": "string",
                         "example": "xhovana"
+                    }
+                },
+                "type": "object"
+            },
+            "DestinationResource": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Destination 1"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
                     }
                 },
                 "type": "object"

@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Article;
-
+use App\Http\Resources\DestinationResource;
 /**
  * @OA\Schema(
  *     schema="ArticleResource",
@@ -14,6 +15,7 @@ use App\Models\Article;
  *     @OA\Property(property="subtitle", type="string", example="Understanding the freedom in releasing control and expectations"),
  *     @OA\Property(property="body", type="string", example="In a world that constantly encourages us to hustle, chase, and control outcomes, the idea of letting go can feel like giving up. But true peace and growth often begin when we detach from what we can't control. By surrendering the need for a fixed result, you free yourself from unnecessary anxiety. You allow life to unfold naturally, and often, in better ways than you imagined. Practicing detachment is not weakness; it's strength rooted in trust and emotional maturity."),
  *     @OA\Property(property="slug", type="string", example="the-art-of-letting-go"),
+ *     @OA\Property(property="destination", ref="#/components/schemas/DestinationResource")
  * )
  *
  */
@@ -26,11 +28,15 @@ class ArticleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
+        $destinations = DestinationResource::collection(Destination::byArticle($this->id)->get());
+
         return [
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'body' => $this->body,
-            'slug' => $this->slug
+            'slug' => $this->slug,
+            'destination' => $destinations,
         ];
     }
 }
