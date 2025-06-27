@@ -35,4 +35,18 @@ class ArticleAPIService
         return Article::find($articleId);
     }
 
+
+    /**
+     * Single article datils
+     *
+     * @param string $articleId
+     *
+     * @return Article
+     */
+    public function store(array $request) : Article
+    {
+        return Article::create($request);
+    }
+
+
 }

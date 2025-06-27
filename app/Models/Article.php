@@ -46,6 +46,10 @@ class Article extends Model
         ->orWhere('body', 'like', "%{$searchText}%");
     }
 
+
+    /**
+     * Get the route key for the model.
+     */
     public function getRouteKeyName()
     {
         return 'slug';

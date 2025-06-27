@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+
+/**
+ * @OA\Schema(
+ *     schema="StoreArticleRequest",
+ *     type="object",
+ *     title="New Article Data Request",
+ *     description="New articles data",
+ *     @OA\Property(
+ *         property="title",
+ *         type="string",
+ *         description="The article title",
+ *         example="My New Title"
+ *     ),
+ *     @OA\Property(
+ *         property="subtitle",
+ *         type="string",
+ *         description="The article subtitle",
+ *         example="My Subtitle"
+ *     ),
+ *     @OA\Property(
+ *         property="body",
+ *         type="string",
+ *         description="The article body",
+ *         example="Some body text"
+ *     ),
+ *     @OA\Property(
+ *         property="slug",
+ *         type="string",
+ *         example="my-new-title-2"
+ *     )
+ * )
+ */
+
+
+class StoreArticleRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'title' => ['required','string'],
+            'subtitle' => ['required','string'],
+            'body' => ['required','string'],
+            'slug' => ['required','string', 'unique:articles,slug'],
+        ];
+    }
+}
