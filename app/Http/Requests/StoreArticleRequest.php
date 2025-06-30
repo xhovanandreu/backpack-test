@@ -10,7 +10,7 @@ use Illuminate\Foundation\Http\FormRequest;
  *     schema="StoreArticleRequest",
  *     type="object",
  *     title="New Article Data Request",
- *     description="New articles data",
+ *     description="New article's data",
  *     @OA\Property(
  *         property="title",
  *         type="string",

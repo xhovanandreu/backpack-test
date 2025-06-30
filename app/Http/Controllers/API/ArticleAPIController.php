@@ -171,7 +171,11 @@ class ArticleAPIController extends Controller
 
             $article = $articleAPIService->store($validatedRequest);
 
-            return response()->json(['success' => true, 'message' => 'Article saved successfully', 'data' => (new ArticleResource($article))]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Article saved successfully',
+                'data' => (new ArticleResource($article))
+            ]);
 
         } catch (QueryException $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], ResponseAlias::HTTP_UNPROCESSABLE_ENTITY);
@@ -188,7 +192,6 @@ class ArticleAPIController extends Controller
      *     path="/api/v1/articles/{slug}",
      *     summary="Update an existing article",
      *     description="Updates the specified article using the given data",
-     *     operationId="updateArticle",
      *     tags={"Articles"},
      *     security={{"bearerAuth":{}}},
      *
@@ -232,7 +235,11 @@ class ArticleAPIController extends Controller
         try {
             $article->update($updateArticleRequest->validated());
 
-            return response()->json(['success' => true, 'message' => 'Article updated successfully', 'data' => (new ArticleResource($article))]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Article updated successfully',
+                'data' => (new ArticleResource($article))
+            ]);
 
         } catch (QueryException $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], ResponseAlias::HTTP_UNPROCESSABLE_ENTITY);
